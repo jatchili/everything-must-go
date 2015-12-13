@@ -1,0 +1,4 @@
+*.sqlite3
+*.pyc
+emg/settings.py
+.DS_Store

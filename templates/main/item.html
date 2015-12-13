@@ -1,0 +1,69 @@
+{% extends "main/base.html" %}
+
+{% block content %}
+
+<h1>{{ item.title }} (${{ current_price }})</h1>
+
+<div style="float:left">
+	<a href="{{ item.image_url }}" target="_blank"><img src="{{ item.image_url }}" width="240" height="240"></a>
+</div>
+
+<div style="width: calc(100% - 260px); float:left; margin-left:10px;">
+	<b>Description:</b> {{ item.description }}
+	<p>
+		This auction 
+		{% if item.get_time_left %}
+			closes in {{item.get_time_left}}.
+		{% else %}
+			is closed.
+		{% endif %}
+		{% if beaten %}Your bid of ${{beaten}} has been beaten!{% endif %}
+		{% ifequal user item.get_winner %}You are currently the winning bidder!{% endifequal %}
+	</p>
+	{% if item.get_time_left %}
+		{% if user.is_authenticated %}
+			<form action="" method="post">
+				{% csrf_token %}
+				<p>$<input name="bid_price" type="text" placeholder="your bid"/>
+				{% if bid_error %}
+					<span class="error">invalid bid!</span>
+				{% endif %}
+				{% if bid_success %}
+					<span class="success">bid submitted!</span>
+				{% endif %}
+				<br/>
+				(must be >${{ current_price }}, and a multiple of $0.25)</p>
+				<p>By clicking "submit bid" you are agreeing to pay up to that amount for this item unless someone else beats your bid before closing time.<br/>
+				<input type="submit" value="submit bid"/></p>
+			</form>
+		{% else %}
+			<p><a href="/emg/login">Log in</a> to bid on this item.</p>
+		{% endif %}
+	{% else %}
+		{% ifequal user winner %}
+			<p>You won this item for ${{ current_price }}.</p>
+		{% endifequal %}
+		{% if user.is_superuser %}
+			<p>{{winner}} won this item for ${{ current_price }}.</p>
+		{% endif %}
+	{% endif %}
+</div>
+
+{% if user.is_superuser %}
+	<div style="clear:both"></div>
+	<hr/>
+	<table border=1>
+		{% for bid in bids_for_item %}
+		<tr>
+			<td>{{bid.id}}</td>
+			<td>{{bid.price}}</td>
+			<td>{{bid.user}}</td>
+			<td>{{bid.created_at}}</td>
+		</tr>
+		{% endfor %}
+	</table>
+{% endif %}
+
+
+
+{% endblock %}

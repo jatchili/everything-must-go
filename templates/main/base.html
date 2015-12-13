@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+* {
+	font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+	font-size: 14pt;
+}
+
+h1 {
+	font-size: 24pt;
+}
+
+h2 {
+	font-size: 18pt;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+}
+
+.error {
+	color: #c00;
+}
+
+.success {
+	color: #0a0;
+}
+
+#topbar {
+	height: 50px;
+	width: 100%;
+	background-color: black;
+}
+
+#topbar div {
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+#topbar div, #topbar a {
+	color: #0af;
+	font-size: 18pt;
+	text-decoration: none;
+}
+#topbar a:hover {
+	color: #0df;
+}
+
+#logo {
+	font-weight: bold;
+	padding-left: 20px;
+	float: left;
+}
+#logo a {
+	font-family: cursive;
+}
+
+#controls {
+	padding-right: 20px;
+	float: right;
+}
+
+#main {
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+ul li {
+	display: inline;
+	margin-right: 20px;
+}
+
+ul li a {
+	text-decoration: none;
+	color: black;
+}
+
+ul li.current {
+	border-bottom: 4px solid #0af;
+}
+
+.item {
+	border: 1px solid black;
+	margin: 10px;
+	width: 240px;
+	height: 340px;
+	float: left;
+}
+
+.item .image {
+	position: relative;
+}
+
+.item .image .price {
+	position: absolute;
+	left: 0;
+	top: 0;
+	padding: 5px;
+	background-color: white;
+	opacity: 0.67;
+	font-size: 16pt;
+	font-weight: bold;
+}
+
+.item .info {
+	padding: 5px;
+	padding-top: 0;
+}
+
+.item .title {
+	font-weight: bold;
+}
+
+.item div a {
+	text-decoration: none;
+	color: inherit;
+}
+.item div a:hover {
+	text-decoration: underline;
+}
+
+.item .timeleft {
+	float: left;
+}
+
+.item .seller {
+	float: right;
+}
+
+</style>
+
+<title>Everything Must Go!{% block title %}{% endblock %}</title>
+</head>
+
+<body>
+
+<div id="topbar">
+	<div id="logo"><a href="{{ BASE_URL }}">Everything Must Go!</a></div>
+	<div id="controls">
+		{% if user.is_authenticated %}
+			<a href="{{ BASE_URL }}me">{{ user }}</a> |
+			<a href="{{ BASE_URL }}logout">log out</a>
+		{% else %}
+			<a href="{{ BASE_URL }}login">log in / sign up</a>
+		{% endif %}
+	</div>
+	<div style="clear:both"></div>
+</div>
+
+<div id="main">
+
+{% block content %}{% endblock %}
+
+</div> <!-- end main div -->
+
+</body>
+
+
+</html>

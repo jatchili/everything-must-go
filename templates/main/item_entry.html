@@ -1,0 +1,18 @@
+<div class="item">
+	<div class="image">
+		<div class="price">${{item.get_current_bid}}</div>
+		<a href="{{ BASE_URL }}item/{{item.id}}">
+			<img src="{{item.image_url}}" width="240" height="240" />
+		</a>
+	</div>
+	<div class="info">
+		<div class="title"><a href="{{ BASE_URL }}item/{{item.id}}">{{item.title}}</a></div>
+		<div class="timeleft">
+			{% if item.get_time_left %}
+				{{item.get_time_left}} left
+			{% else %}
+				auction closed
+			{% endif %}
+		</div>
+	</div>
+</div>

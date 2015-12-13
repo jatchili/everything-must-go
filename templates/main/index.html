@@ -1,0 +1,63 @@
+{% extends "main/base.html" %}
+
+{% block content %}
+<ul id="categories">
+	<li {% ifequal category "all" %} class="current">
+		{% else %}><a href="{{ BASE_URL }}{% ifnotequal sort 'active' %}?sort={{sort}}{% endifnotequal %}">
+		{% endifequal %}all</a>
+	</li>
+	<li {% ifequal category "books" %} class="current">
+		{% else %}><a href="{{ BASE_URL }}?category=books{% ifnotequal sort 'active' %}&sort={{sort}}{% endifnotequal %}">
+		{% endifequal %}books</a>
+	</li>
+	<li {% ifequal category "clothing" %} class="current">
+		{% else %}><a href="{{ BASE_URL }}?category=clothing{% ifnotequal sort 'active' %}&sort={{sort}}{% endifnotequal %}">
+		{% endifequal %}clothing</a>
+	</li>
+	<li {% ifequal category "toys" %} class="current">
+		{% else %}><a href="{{ BASE_URL }}?category=toys{% ifnotequal sort 'active' %}&sort={{sort}}{% endifnotequal %}">
+		{% endifequal %}toys</a>
+	</li>
+	<li {% ifequal category "office" %} class="current">
+		{% else %}><a href="{{ BASE_URL }}?category=office{% ifnotequal sort 'active' %}&sort={{sort}}{% endifnotequal %}">
+		{% endifequal %}office</a>
+	</li>
+	<li {% ifequal category "household" %} class="current">
+		{% else %}><a href="{{ BASE_URL }}?category=household{% ifnotequal sort 'active' %}&sort={{sort}}{% endifnotequal %}">
+		{% endifequal %}household</a>
+	</li>
+	<li {% ifequal category "food" %} class="current">
+		{% else %}><a href="{{ BASE_URL }}?category=food{% ifnotequal sort 'active' %}&sort={{sort}}{% endifnotequal %}">
+		{% endifequal %}food</a>
+	</li>
+</ul>
+
+<ul id="sorts">
+	<li {% ifequal sort "active" %} class="current">
+		{% else %}><a href="{{ BASE_URL }}{% ifnotequal category 'all' %}?category={{category}}{% endifnotequal %}">
+		{% endifequal %}active</a>
+	</li>
+	<li {% ifequal sort "newest" %} class="current">
+		{% else %}><a href="{{ BASE_URL }}{% ifnotequal category 'all' %}?category={{category}}&{% else %}?{% endifnotequal %}sort=newest">
+		{% endifequal %}newest</a>
+	</li>
+	<li {% ifequal sort "cheapest" %} class="current">
+		{% else %}><a href="{{ BASE_URL }}{% ifnotequal category 'all' %}?category={{category}}&{% else %}?{% endifnotequal %}sort=cheapest">
+		{% endifequal %}cheapest</a>
+	</li>
+	<li {% ifequal sort "priciest" %} class="current">
+		{% else %}><a href="{{ BASE_URL }}{% ifnotequal category 'all' %}?category={{category}}&{% else %}?{% endifnotequal %}sort=priciest">
+		{% endifequal %}priciest</a>
+	</li>
+</ul>
+
+
+<div id="listing">
+{% for item in item_list %}
+	{% include 'main/item_entry.html' %}
+{% endfor %}
+<div style="clear:both"></div>
+</div> <!-- end item listing -->
+
+
+{% endblock %}
