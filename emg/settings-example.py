@@ -25,7 +25,7 @@ SECRET_KEY = 'some-random-string'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['*','yourdomain.example.com']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
