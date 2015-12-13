@@ -4,6 +4,10 @@ This is a Django web app for auctioning off items to the highest bidder. It's us
 
 There's no mechanism for payment processing - the app merely notes how much each bidder is supposed to pay. So, you should only use it among people you trust to pay their debts.
 
+![Home page screenshot](http://i.imgur.com/nO4ZsBt.png)
+
+![Item page screenshot](http://i.imgur.com/cw5PHKb.png)
+
 ## Setup
 
 ### Settings
